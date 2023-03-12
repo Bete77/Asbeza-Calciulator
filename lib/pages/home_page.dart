@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                 const Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
-                    "Order and recieve your አስቤዛ from wherever you are!",
+                    "Calcuate your አስቤዛ from wherever you are!",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontFamily: "poppins",
@@ -59,17 +59,20 @@ class _HomePageState extends State<HomePage> {
                 const Spacer(),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
+                      shape: StadiumBorder(),
                       backgroundColor: Colors.black,
                       foregroundColor: Colors.white,
-                      minimumSize: const Size(200, 50),
-                      alignment: Alignment.center,
-                      elevation: 0),
+                      minimumSize: const Size(200, 80),
+                      alignment: Alignment.center),
                   onPressed: () {
                     BlocProvider.of<GroceryBloc>(context)
                         .add(const GroceryFetchEvent());
                   },
-                  icon: const Icon(Icons.shopping_basket_rounded),
-                  label: const Text("Browse Groceries"),
+                  icon: const Icon(Icons.browse_gallery_outlined),
+                  label: const Text(
+                    "Browse Groceries",
+                    style: TextStyle(fontSize: 20, fontFamily: 'Poppins'),
+                  ),
                 ),
                 const Spacer()
               ]),
@@ -108,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Container(
-                      height: 350,
+                      height: 490,
                       child: ListView.builder(
                           itemCount: state.grocery.length,
                           scrollDirection: Axis.horizontal,
@@ -124,29 +127,43 @@ class _HomePageState extends State<HomePage> {
                                     borderRadius: BorderRadius.circular(20),
                                     color: Colors.white,
                                   ),
-                                  child: Column(children: [
-                                    Image.network(groceries.groceryImage),
-                                    const Divider(),
-                                    Text(
-                                      groceries.groceryTitle,
-                                      style: const TextStyle(
-                                          fontSize: 12, color: Colors.black),
-                                    ),
-                                    Text(
-                                      "${groceries.groceryPrice.toString()}",
-                                      style: TextStyle(
-                                          fontSize: 12, color: Colors.black),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        BlocProvider.of<GroceryBloc>(context)
-                                            .add(CartEvent(grocery: groceries));
-                                      },
-                                      child: const Text("Add to Cart"),
-                                      style: ElevatedButton.styleFrom(
-                                          primary: Colors.black),
-                                    ),
-                                  ]),
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Image.network(groceries.groceryImage),
+                                        const Divider(),
+                                        Text(
+                                          groceries.groceryTitle,
+                                          style: const TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.black,
+                                              fontFamily: "Poppins"),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          "Price" +
+                                              "${groceries.groceryPrice.toString()}",
+                                          style: const TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.black,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            BlocProvider.of<GroceryBloc>(
+                                                    context)
+                                                .add(CartEvent(
+                                                    grocery: groceries));
+                                          },
+                                          child: const Text("Add to Cart"),
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Colors.black),
+                                        ),
+                                      ]),
                                 ),
                               ),
                             );

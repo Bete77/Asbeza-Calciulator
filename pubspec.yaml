@@ -40,6 +40,10 @@ dependencies:
   bloc: ^8.1.1
   flutter_bloc: ^8.1.2
   equatable: ^2.0.5
+  permission_handler: ^10.2.0
+  fast_contacts: ^3.0.3
+  mobile_number: ^2.1.1
+  mobile_number_picker: ^0.0.1+5
 
 dev_dependencies:
   flutter_test:

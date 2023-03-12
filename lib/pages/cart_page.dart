@@ -23,11 +23,11 @@ class _CartPageState extends State<CartPage> {
           if (state is GroceryInitial) {
             return const Center(
                 child: Text(
-              "NO HISTORY TO SHOW!\n TOTAL: 0\$",
+              "Nothing in the Cart!",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.bold,
               ),
             ));
           }
@@ -39,7 +39,7 @@ class _CartPageState extends State<CartPage> {
             if (state.cart.isEmpty) {
               return const Center(
                   child: Text(
-                "NO HISTORY TO SHOW!\n TOTAL: 0\$",
+                "Nothing in the cart currently!",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,
@@ -49,24 +49,17 @@ class _CartPageState extends State<CartPage> {
             } else {
               num TotalPrice = 0;
               void _incrementCounter() {
-                for (var element in state.cart) {
-                  TotalPrice += element.groceryPrice;
+                for (var item in state.cart) {
+                  TotalPrice += item.groceryPrice;
                 }
               }
 
               _incrementCounter();
               return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "TOTAL: ${TotalPrice.toStringAsFixed(2)}\$",
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w900),
-                    ),
-                  ),
                   Container(
-                    height: 350,
+                    height: 400,
                     child: ListView.builder(
                         itemCount: state.cart.length,
                         scrollDirection: Axis.horizontal,
@@ -88,18 +81,39 @@ class _CartPageState extends State<CartPage> {
                                   Text(
                                     valueOfCart.groceryTitle,
                                     style: const TextStyle(
-                                        fontSize: 12, color: Colors.black),
+                                        fontSize: 12,
+                                        color: Colors.black,
+                                        fontFamily: "Poppins",
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
                                   ),
                                   Text(
-                                    "${valueOfCart.groceryPrice.toString()}",
-                                    style: TextStyle(
-                                        fontSize: 12, color: Colors.black),
+                                    "Price" +
+                                        " " +
+                                        "${valueOfCart.groceryPrice.toString()}",
+                                    style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black,
+                                        fontFamily: "Poppins",
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ]),
                               ),
                             ),
                           );
                         }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      "Total Price: ${TotalPrice.toStringAsFixed(2)}\$",
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: "Poppins"),
+                    ),
                   ),
                 ],
               );

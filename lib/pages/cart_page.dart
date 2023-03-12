@@ -90,8 +90,7 @@ class _CartPageState extends State<CartPage> {
                                     height: 20,
                                   ),
                                   Text(
-                                    "Price" +
-                                        " " +
+                                    "Price " +
                                         "${valueOfCart.groceryPrice.toString()}",
                                     style: const TextStyle(
                                         fontSize: 12,

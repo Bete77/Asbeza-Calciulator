@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                                           height: 20,
                                         ),
                                         Text(
-                                          "Price" +
+                                          "Price " +
                                               "${groceries.groceryPrice.toString()}",
                                           style: const TextStyle(
                                               fontSize: 12,

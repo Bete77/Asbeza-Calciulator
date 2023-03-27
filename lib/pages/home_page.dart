@@ -37,46 +37,8 @@ class _HomePageState extends State<HomePage> {
       body: BlocBuilder<GroceryBloc, GroceryState>(
         builder: (context, state) {
           if (state is GroceryInitial) {
-            return Scaffold(
-              backgroundColor: Colors.white,
-              body: Column(children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 0.0, bottom: 40, top: 20),
-                  child: Image.asset('assets/images/cp.png'),
-                ),
-                const Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    "Calcuate your አስቤዛ from wherever you are!",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: "poppins",
-                        fontSize: 30,
-                        color: Colors.black),
-                  ),
-                ),
-                const Spacer(),
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                      shape: StadiumBorder(),
-                      backgroundColor: Colors.black,
-                      foregroundColor: Colors.white,
-                      minimumSize: const Size(200, 80),
-                      alignment: Alignment.center),
-                  onPressed: () {
-                    BlocProvider.of<GroceryBloc>(context)
-                        .add(const GroceryFetchEvent());
-                  },
-                  icon: const Icon(Icons.browse_gallery_outlined),
-                  label: const Text(
-                    "Browse Groceries",
-                    style: TextStyle(fontSize: 20, fontFamily: 'Poppins'),
-                  ),
-                ),
-                const Spacer()
-              ]),
-            );
+            BlocProvider.of<GroceryBloc>(context)
+                .add(const GroceryFetchEvent());
           }
           if (state is GrocerySuccess) {
             //print(state.grocery[0].groceryTitle);

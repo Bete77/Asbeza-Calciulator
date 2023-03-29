@@ -1,4 +1,5 @@
 import 'package:asbeza/bloc/test_bloc.dart';
+import 'package:asbeza/bloc/test_event.dart';
 import 'package:asbeza/bloc/test_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,8 +31,7 @@ class _CartPageState extends State<CartPage> {
                 fontWeight: FontWeight.bold,
               ),
             ));
-          }
-          if (state is GroceryLoading) {
+          } else if (state is GroceryLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -50,7 +50,7 @@ class _CartPageState extends State<CartPage> {
               num TotalPrice = 0;
               void _incrementCounter() {
                 for (var item in state.cart) {
-                  TotalPrice += item.groceryPrice;
+                  TotalPrice += item.groceryPrice * item.groceryQuantity;
                 }
               }
 
@@ -59,7 +59,7 @@ class _CartPageState extends State<CartPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    height: 400,
+                    height: 500,
                     child: ListView.builder(
                         itemCount: state.cart.length,
                         scrollDirection: Axis.horizontal,
@@ -97,6 +97,37 @@ class _CartPageState extends State<CartPage> {
                                         color: Colors.black,
                                         fontFamily: "Poppins",
                                         fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "Quantity " +
+                                        "${valueOfCart.groceryQuantity}",
+                                    style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black,
+                                        fontFamily: "Poppins",
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      BlocProvider.of<GroceryBloc>(context)
+                                          .add(AddAmountEvent(index));
+
+                                      setState(() {});
+                                    },
+                                    child: const Text("Add Item"),
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Colors.black),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      BlocProvider.of<GroceryBloc>(context)
+                                          .add(SubAmountEvent(index));
+
+                                      setState(() {});
+                                    },
+                                    child: const Text("Remove Item"),
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Colors.red),
                                   ),
                                 ]),
                               ),

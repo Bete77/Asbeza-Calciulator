@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int totalItemsInCart = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,9 +40,14 @@ class _HomePageState extends State<HomePage> {
           if (state is GroceryInitial) {
             BlocProvider.of<GroceryBloc>(context)
                 .add(const GroceryFetchEvent());
+          } else if (state is GroceryLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
           if (state is GrocerySuccess) {
-            //print(state.grocery[0].groceryTitle);
+            totalItemsInCart = state.cart.length;
+
             return Column(
               children: [
                 Column(
@@ -57,10 +63,10 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(fontFamily: "poppins"),
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24.0),
                       child: Text(
-                        "Lets calculate some fresh አስቤዛ for you!",
+                        "Currently you have ${state.cart.length}",
                         style: TextStyle(fontFamily: "poppins", fontSize: 25),
                       ),
                     ),
@@ -79,6 +85,7 @@ class _HomePageState extends State<HomePage> {
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (BuildContext context, int index) {
                             final groceries = state.grocery[index];
+
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: InkWell(
@@ -119,7 +126,9 @@ class _HomePageState extends State<HomePage> {
                                             BlocProvider.of<GroceryBloc>(
                                                     context)
                                                 .add(CartEvent(
-                                                    grocery: groceries));
+                                              grocery: groceries,
+                                            ));
+                                            setState(() {});
                                           },
                                           child: const Text("Add to Cart"),
                                           style: ElevatedButton.styleFrom(

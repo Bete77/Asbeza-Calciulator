@@ -16,3 +16,5 @@ class GrocerySuccess extends GroceryState {
   final List cart;
   const GrocerySuccess({required this.grocery, required this.cart});
 }
+
+class GroceryFailed extends GroceryState {}

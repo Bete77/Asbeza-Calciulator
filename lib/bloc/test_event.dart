@@ -24,3 +24,27 @@ class CartEvent extends GroceryEvent {
 
   get data => grocery;
 }
+
+class AddAmountEvent extends GroceryEvent {
+  final int index;
+  AddAmountEvent(
+    this.index,
+  );
+
+  @override
+  List<Object> get props => [];
+
+  get data => index;
+}
+
+class SubAmountEvent extends GroceryEvent {
+  final int index;
+  SubAmountEvent(
+    this.index,
+  );
+
+  @override
+  List<Object> get props => [];
+
+  get data => index;
+}

@@ -1,6 +1,6 @@
 import 'package:asbeza/model/grocery.dart';
 
-import 'db_helper.dart';
+import '../database/db_helper.dart';
 
 class Service {
   Repository? _repository;

@@ -1,20 +1,31 @@
-import 'dart:convert';
-import 'grocery.dart';
-import 'package:http/http.dart' as http;
+import 'package:asbeza/model/grocery.dart';
 
-class ApiServiceProvider {
-  Future<List?> fetchActivity() async {
-    final response = await http.get(
-      Uri.parse('https://fakestoreapi.com/products'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Accept': 'application/json',
-      },
-    );
-    if (response.statusCode == 200) {
-      return Grocery.groceryList(json.decode(response.body));
-    } else {
-      throw Exception('Failed to load');
-    }
+import 'local_db.dart';
+
+class Service {
+  Repository? _repository;
+
+  Service() {
+    _repository = Repository();
+  }
+
+  saveAsbeza(Grocery grocery) async {
+    return await _repository!.insertData('grocery', grocery.toJson());
+  }
+
+  readGrocery() async {
+    return await _repository!.readData('grocery');
+  }
+
+  updateGrocery(Grocery grocery) async {
+    return await _repository!.updateData('grocery', grocery.toJson());
+  }
+
+  deleteGrocery(dispatchId) async {
+    return await _repository!.deleteData('grocery', dispatchId);
+  }
+
+  wipeDate() async {
+    await _repository!.deleteAllData('grocery');
   }
 }

@@ -120,10 +120,9 @@ class _CartPageState extends State<CartPage> {
                                   ),
                                   ElevatedButton(
                                     onPressed: () {
+                                      setState(() {});
                                       BlocProvider.of<GroceryBloc>(context)
                                           .add(SubAmountEvent(index));
-
-                                      setState(() {});
                                     },
                                     child: const Text("Remove Item"),
                                     style: ElevatedButton.styleFrom(

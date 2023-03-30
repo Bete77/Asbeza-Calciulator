@@ -17,6 +17,7 @@ class GroceryFetchEvent extends GroceryEvent {
 
 class CartEvent extends GroceryEvent {
   final Grocery grocery;
+
   const CartEvent({required this.grocery});
 
   @override

@@ -123,12 +123,20 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         ElevatedButton(
                                           onPressed: () {
+                                            setState(() {
+                                              for (var items in state.cart) {
+                                                if (items.id == groceries.id) {
+                                                  groceries.itemStatus = 1;
+                                                  continue;
+                                                }
+                                              }
+                                            });
+
                                             BlocProvider.of<GroceryBloc>(
                                                     context)
                                                 .add(CartEvent(
                                               grocery: groceries,
                                             ));
-                                            setState(() {});
                                           },
                                           child: const Text("Add to Cart"),
                                           style: ElevatedButton.styleFrom(

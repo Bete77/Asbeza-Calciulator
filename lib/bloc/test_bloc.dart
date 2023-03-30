@@ -1,44 +1,62 @@
 import 'package:asbeza/bloc/test_event.dart';
 import 'package:asbeza/bloc/test_state.dart';
+import 'package:asbeza/model/api.dart';
+import 'package:asbeza/model/grocery.dart';
 import 'package:asbeza/model/service.dart';
 
 import 'package:bloc/bloc.dart';
 
 class GroceryBloc extends Bloc<GroceryEvent, GroceryState> {
   final _apiServiceProvider = ApiServiceProvider();
+  final _service = Service();
   List cart = [];
+  List cartLoad = [];
   GroceryBloc() : super(GroceryInitial()) {
     on<GroceryFetchEvent>((event, emit) async {
       emit(GroceryLoading());
       try {
         final activity = await _apiServiceProvider.fetchActivity();
-        emit(GrocerySuccess(grocery: activity!, cart: cart));
+        await _service.readGrocery().then((val) => {
+              cart = val,
+              print(val),
+            });
+        cartLoad = Grocery.cartList(cart);
+        // print(cartLoad);
+        emit(GrocerySuccess(grocery: activity!, cart: cartLoad));
       } catch (e) {
         emit(GroceryFailed());
       }
     });
     on<CartEvent>((event, emit) => {
-          if (!cart.contains(event.data))
+          if (!cartLoad.contains(event.data))
             {
-              cart.add(event.data),
-              event.data.itemStatus = true,
+              // _service.wipeDate(),
+              cartLoad.add(event.data),
+              event.data.itemStatus = 1,
+              _service.saveAsbeza(event.data),
             }
-          else
-            {}
         });
 
-    on<AddAmountEvent>((event, emit) => {cart[event.data].groceryQuantity++});
-
+    on<AddAmountEvent>((event, emit) => {
+          cartLoad[event.data].groceryQuantity++,
+          _service.updateGrocery(
+            cartLoad[event.data],
+          )
+        });
     on<SubAmountEvent>((event, emit) => {
-          if (cart[event.data].groceryQuantity <= 1)
+          if (cartLoad[event.data].groceryQuantity <= 1)
             {
-              cart[event.data].itemStatus = false,
-              cart.removeAt(event.data),
+              cartLoad[event.data].itemStatus = 0,
+              _service.deleteGrocery(cartLoad[event.data].id),
+              cartLoad.removeAt(event.data),
             }
           else
             {
-              cart[event.data].groceryQuantity--,
-            }
+              cartLoad[event.data].groceryQuantity--,
+              _service.updateGrocery(
+                cartLoad[event.data],
+              )
+            },
         });
   }
 }

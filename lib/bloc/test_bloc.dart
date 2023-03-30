@@ -2,7 +2,7 @@ import 'package:asbeza/bloc/test_event.dart';
 import 'package:asbeza/bloc/test_state.dart';
 import 'package:asbeza/model/api.dart';
 import 'package:asbeza/model/grocery.dart';
-import 'package:asbeza/model/service.dart';
+import 'package:asbeza/model/repository.dart';
 
 import 'package:bloc/bloc.dart';
 

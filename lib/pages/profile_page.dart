@@ -54,7 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Asbezaa Calculator"),
+        title: Text("Profile Page"),
         backgroundColor: Colors.black,
       ),
       body: Column(
@@ -62,8 +62,18 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(
             height: 30,
           ),
-          Image.network(
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQybfZDCOylNw3wPpQ9r0F9khF0mXeRcSzx5A&usqp=CAU"),
+          Container(
+            margin: EdgeInsets.fromLTRB(74, 40, 0, 0),
+            width: 200,
+            height: 200,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                  image: NetworkImage(
+                      'https://cdn.statusqueen.com/dpimages/thumbnail/dp_image11-796.jpg'),
+                  fit: BoxFit.fill),
+            ),
+          ),
           const SizedBox(
             height: 30,
           ),

@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Asbezaa"),
+        title: Text("Cart Items Calculator"),
         backgroundColor: Colors.black,
         actions: [
           Container(
@@ -60,13 +60,13 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.symmetric(horizontal: 24.0),
                       child: Text(
                         "Good Morning",
-                        style: TextStyle(fontFamily: "poppins"),
+                        style: TextStyle(fontFamily: "poppins", fontSize: 20),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24.0),
                       child: Text(
-                        "Currently you have ${state.cart.length}",
+                        "Currently you have ${state.cart.length} Items in Your Cart",
                         style: TextStyle(fontFamily: "poppins", fontSize: 25),
                       ),
                     ),
@@ -74,8 +74,8 @@ class _HomePageState extends State<HomePage> {
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24.0),
                       child: Text(
-                        "Common አስቤዛ",
-                        style: TextStyle(fontFamily: "poppins"),
+                        "Items available",
+                        style: TextStyle(fontFamily: "poppins", fontSize: 20),
                       ),
                     ),
                     Container(

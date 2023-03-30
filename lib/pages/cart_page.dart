@@ -16,7 +16,7 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Asbezaa"),
+        title: Text("Cart Items"),
         backgroundColor: Colors.black,
       ),
       body: BlocBuilder<GroceryBloc, GroceryState>(
@@ -77,7 +77,6 @@ class _CartPageState extends State<CartPage> {
                                 ),
                                 child: Column(children: [
                                   Image.network(valueOfCart.groceryImage),
-                                  const Divider(),
                                   Text(
                                     valueOfCart.groceryTitle,
                                     style: const TextStyle(

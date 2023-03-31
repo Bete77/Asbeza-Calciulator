@@ -56,8 +56,10 @@ class _CartPageState extends State<CartPage> {
 
               _incrementCounter();
               return Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  const SizedBox(
+                    height: 60,
+                  ),
                   Container(
                     height: 500,
                     child: ListView.builder(
@@ -75,63 +77,69 @@ class _CartPageState extends State<CartPage> {
                                   borderRadius: BorderRadius.circular(20),
                                   color: Colors.white,
                                 ),
-                                child: Column(children: [
-                                  Image.network(valueOfCart.groceryImage),
-                                  Text(
-                                    valueOfCart.groceryTitle,
-                                    style: const TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text(
-                                    "Price " +
-                                        "${valueOfCart.groceryPrice.toString()}",
-                                    style: const TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    "Quantity " +
-                                        "${valueOfCart.groceryQuantity}",
-                                    style: const TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      BlocProvider.of<GroceryBloc>(context)
-                                          .add(AddAmountEvent(index));
+                                child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Image.network(valueOfCart.groceryImage),
+                                      Text(
+                                        valueOfCart.groceryTitle,
+                                        style: const TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.black,
+                                            fontFamily: "Poppins",
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        "Price " +
+                                            "${valueOfCart.groceryPrice.toString()}",
+                                        style: const TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.black,
+                                            fontFamily: "Poppins",
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        "Quantity " +
+                                            "${valueOfCart.groceryQuantity}",
+                                        style: const TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.black,
+                                            fontFamily: "Poppins",
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          BlocProvider.of<GroceryBloc>(context)
+                                              .add(AddAmountEvent(index));
 
-                                      setState(() {});
-                                    },
-                                    child: const Text("Add Item"),
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Colors.black),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      setState(() {});
-                                      BlocProvider.of<GroceryBloc>(context)
-                                          .add(SubAmountEvent(index));
-                                    },
-                                    child: const Text("Remove Item"),
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Colors.red),
-                                  ),
-                                ]),
+                                          setState(() {});
+                                        },
+                                        child: const Text("Add Item"),
+                                        style: ElevatedButton.styleFrom(
+                                            primary: Colors.black),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          setState(() {});
+                                          BlocProvider.of<GroceryBloc>(context)
+                                              .add(SubAmountEvent(index));
+                                        },
+                                        child: const Text("Remove Item"),
+                                        style: ElevatedButton.styleFrom(
+                                            primary: Colors.red),
+                                      ),
+                                    ]),
                               ),
                             ),
                           );
                         }),
+                  ),
+                  const SizedBox(
+                    height: 60,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(10.0),

@@ -54,20 +54,23 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
-                      height: 48,
+                      height: 38,
                     ),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24.0),
                       child: Text(
                         "Good Morning",
-                        style: TextStyle(fontFamily: "poppins", fontSize: 20),
+                        style: TextStyle(fontFamily: "poppins", fontSize: 15),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 20,
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24.0),
                       child: Text(
                         "Currently you have ${state.cart.length} Items in Your Cart",
-                        style: TextStyle(fontFamily: "poppins", fontSize: 25),
+                        style: TextStyle(fontFamily: "poppins", fontSize: 20),
                       ),
                     ),
                     Divider(),
@@ -75,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.symmetric(horizontal: 24.0),
                       child: Text(
                         "Items available",
-                        style: TextStyle(fontFamily: "poppins", fontSize: 20),
+                        style: TextStyle(fontFamily: "poppins", fontSize: 15),
                       ),
                     ),
                     Container(

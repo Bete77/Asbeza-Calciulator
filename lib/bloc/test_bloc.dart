@@ -1,8 +1,8 @@
 import 'package:asbeza/bloc/test_event.dart';
 import 'package:asbeza/bloc/test_state.dart';
+import 'package:asbeza/database/repository.dart';
 import 'package:asbeza/model/api.dart';
 import 'package:asbeza/model/grocery.dart';
-import 'package:asbeza/model/repository.dart';
 
 import 'package:bloc/bloc.dart';
 
@@ -18,7 +18,6 @@ class GroceryBloc extends Bloc<GroceryEvent, GroceryState> {
         final activity = await _apiServiceProvider.fetchActivity();
         await _service.readGrocery().then((val) => {
               cart = val,
-              print(val),
             });
         cartLoad = Grocery.cartList(cart);
         // print(cartLoad);
